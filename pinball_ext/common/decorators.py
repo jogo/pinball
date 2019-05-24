@@ -13,6 +13,7 @@
 # limitations under the License.
 
 """Various decorator classes."""
+from __future__ import print_function
 
 import sys
 import time
@@ -31,7 +32,7 @@ LOG = get_logger('pinball_ext.common.decorators.retry')
 
 
 def retry(ExceptionToCheck, tries=4, delay=3, backoff=2, logger=LOG,
-          sleep_func=time.sleep, max_delay=sys.maxint):
+          sleep_func=time.sleep, max_delay=sys.maxsize):
     """Retry calling the decorated function using an exponential backoff.
 
     http://www.saltycrane.com/blog/2009/11/trying-out-retry-decorator-python/
@@ -64,7 +65,7 @@ def retry(ExceptionToCheck, tries=4, delay=3, backoff=2, logger=LOG,
             while mtries > 1:
                 try:
                     return f(*args, **kwargs)
-                except ExceptionToCheck, e:
+                except ExceptionToCheck as e:
                     if logger:
                         # Don't evaluate the message string as logger module
                         # uses lazy evaluation: assembles the string only if it
@@ -72,8 +73,8 @@ def retry(ExceptionToCheck, tries=4, delay=3, backoff=2, logger=LOG,
                         logger.warning(
                             "%s, Retrying in %d seconds...", e, mdelay)
                     else:
-                        print "%s, Retrying in %d seconds..." % (
-                            str(e), mdelay)
+                        print("%s, Retrying in %d seconds..." % (
+                            str(e), mdelay))
                     sleep_func(mdelay)
                     mtries -= 1
                     mdelay *= backoff

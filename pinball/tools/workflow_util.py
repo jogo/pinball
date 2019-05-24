@@ -13,6 +13,7 @@
 # limitations under the License.
 
 """Command line tool to monitor and control workflows."""
+from __future__ import print_function
 import abc
 import argparse
 import datetime
@@ -179,7 +180,7 @@ class Pause(Command):
             timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M")
             token.owner = 'workflow_util user %s machine %s time %s' % (
                 getpass.getuser(), socket.gethostname(), timestamp)
-            token.expirationTime = sys.maxint
+            token.expirationTime = sys.maxsize
 
     def execute(self, client, store):
         instance_tokens = _get_all_tokens(self._workflow,
@@ -1138,12 +1139,12 @@ class Cleanup(Command):
         if not tokens_to_delete:
             output += 'no tokens need to be cleaned up\n'
         else:
-            print 'removing tokens:'
+            print('removing tokens:')
             for token in tokens_to_delete:
-                print '\t%s' % token.name
-            print 'removing directories:'
+                print('\t%s' % token.name)
+            print('removing directories:')
             for directory in directories_to_delete:
-                print '\t%s' % directory
+                print('\t%s' % directory)
             message = 'remove %d tokens and %d directories' % (
                 len(tokens_to_delete), len(directories_to_delete))
             if self._force or confirm(message):
@@ -1278,7 +1279,7 @@ def main():
     if hasattr(PinballConfig, 'MASTER_NAME') and PinballConfig.MASTER_NAME:
         master_name(PinballConfig.MASTER_NAME)
 
-    print run_command(options)
+    print(run_command(options))
 
 
 if __name__ == '__main__':

@@ -13,6 +13,7 @@
 # limitations under the License.
 
 """Command line tool to start token master and workflow workers."""
+from __future__ import print_function
 import argparse
 import gc
 import guppy
@@ -114,8 +115,7 @@ def _run_worker(factory, emailer, store=None):
                 LOG.exception('')
                 LOG.warn("worker thread throws due to: %s, retrying ...", str(ex))
             else:
-                print >> sys.stderr,\
-                    "worker thread throws due to: %s, retrying ..." % str(ex)
+                print("worker thread throws due to: %s, retrying ..." % str(ex), file=sys.stderr)
 
 
 def _wait_for_threads(threads):

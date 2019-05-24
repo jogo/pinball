@@ -228,7 +228,7 @@ class PauseTestCase(unittest.TestCase):
         self.assertEqual(owned_token.name, original_token.name)
         self.assertEqual(owned_token.version, original_token.version)
         self.assertTrue(owned_token.owner.startswith('workflow_util'))
-        self.assertEqual(sys.maxint, owned_token.expirationTime)
+        self.assertEqual(sys.maxsize, owned_token.expirationTime)
         self.assertEqual('claimed 1 token(s) in 1 tries\n', output)
 
 
@@ -262,7 +262,7 @@ class ResumeTestCase(unittest.TestCase):
                       name='/workflow/some_workflow/123/job/waiting/some_job',
                       data='some_data',
                       owner='some_owner',
-                      expirationTime=sys.maxint)
+                      expirationTime=sys.maxsize)
         query_response = QueryResponse(tokens=[[token]])
         client = mock.Mock()
         client.query.return_value = query_response
@@ -879,7 +879,7 @@ class ReScheduleTestCase(unittest.TestCase):
                           name='/schedule/workflow/some_workflow',
                           data=pickle.dumps(schedule),
                           owner='some_owner',
-                          expirationTime=sys.maxint)
+                          expirationTime=sys.maxsize)
         new_token = copy.copy(old_token)
         schedule.recurrence_seconds = 100
         new_token.data = pickle.dumps(schedule)
@@ -927,7 +927,7 @@ class ReScheduleTestCase(unittest.TestCase):
                           name='/schedule/workflow/some_workflow',
                           data=pickle.dumps(schedule),
                           owner='some_owner',
-                          expirationTime=sys.maxint)
+                          expirationTime=sys.maxsize)
         new_token = copy.copy(old_token)
         schedule.recurrence_seconds = 100
         new_token.data = pickle.dumps(schedule)
@@ -937,7 +937,7 @@ class ReScheduleTestCase(unittest.TestCase):
                                 name='/schedule/workflow/some_other_workflow',
                                 data=pickle.dumps(schedule),
                                 owner='some_owner',
-                                expirationTime=sys.maxint)
+                                expirationTime=sys.maxsize)
         other_new_token = copy.copy(other_old_token)
         other_new_token.data = pickle.dumps(schedule)
 
@@ -998,7 +998,7 @@ class UnScheduleTestCase(unittest.TestCase):
                       name='/schedule/workflow/some_workflow',
                       data='some_data',
                       owner='some_owner',
-                      expirationTime=sys.maxint)
+                      expirationTime=sys.maxsize)
         query_response = QueryResponse(tokens=[[token]])
         client = mock.Mock()
         client.query.return_value = query_response

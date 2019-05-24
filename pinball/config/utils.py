@@ -124,7 +124,7 @@ def timestamp_to_str(timestamp):
     """
     if not timestamp:
         return ''
-    if timestamp == sys.maxint:
+    if timestamp == sys.maxsize:
         # sys.maxint represents infinity.
         return 'inf'
     utc = pytz.timezone('UTC')
@@ -162,7 +162,7 @@ def get_unique_name():
                                      thread_name,
                                      threading.current_thread().ident,
                                      int(time.time() * 1000),
-                                     int(random.random() * sys.maxint))
+                                     int(random.random() * sys.maxsize))
 
 
 def token_data_to_str(token_data):
@@ -175,7 +175,7 @@ def token_data_to_str(token_data):
 def token_to_str(token):
     data_str = token_data_to_str(token.data)
     if token.expirationTime:
-        if token.expirationTime == sys.maxint:
+        if token.expirationTime == sys.maxsize:
             expiration = 'inf (%d)' % token.expirationTime
         else:
             expiration = timestamp_to_str(token.expirationTime)

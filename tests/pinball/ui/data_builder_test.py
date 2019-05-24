@@ -311,7 +311,7 @@ class DataBuilderTestCase(unittest.TestCase):
     # at sys.maxint time
     def test_workflow_data_from_instances_data2(self):
         wf_instance_list = [
-            WorkflowInstanceData('wf', '22346', Status.ABORTED, 12355, sys.maxint),
+            WorkflowInstanceData('wf', '22346', Status.ABORTED, 12355, sys.maxsize),
             WorkflowInstanceData('wf', '22347', Status.SUCCESS, 12365, 12390),
             WorkflowInstanceData('wf', '22345', Status.RUNNING, 12345, None),
         ]
@@ -346,7 +346,7 @@ class DataBuilderTestCase(unittest.TestCase):
         wf_instance_list = [
             WorkflowInstanceData('wf', '22346', Status.ABORTED, 12345, 12392),
             WorkflowInstanceData('wf', '22347', Status.SUCCESS, 12346, 12393),
-            WorkflowInstanceData('wf', '22345', Status.FAILURE, 12391, sys.maxint),
+            WorkflowInstanceData('wf', '22345', Status.FAILURE, 12391, sys.maxsize),
             ]
         wf_data = DataBuilder._workflow_data_from_instances_data(
             wf_instance_list)

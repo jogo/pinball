@@ -81,7 +81,7 @@ class MasterHandlerTestCase(unittest.TestCase):
         query.maxTokens = 10
         request = QueryAndOwnRequest()
         request.owner = 'some_owner'
-        request.expirationTime = sys.maxint
+        request.expirationTime = sys.maxsize
         request.query = query
         handler = MasterHandler(EphemeralStore())
         response = handler.query_and_own(request)

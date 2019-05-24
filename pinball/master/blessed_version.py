@@ -56,7 +56,7 @@ class BlessedVersion(Token):
             now = BlessedVersion._get_timestamp_millis()
             data_str = ('blessed version created at %s' %
                         timestamp_to_str(now / 1000))
-            Token.__init__(self, now, name, owner, sys.maxint, 0, data_str)
+            Token.__init__(self, now, name, owner, sys.maxsize, 0, data_str)
         else:
             Token.__init__(self)
 

@@ -281,13 +281,13 @@ class TransactionTestCase(unittest.TestCase):
         some_token.expirationTime = 10  # in the past
         some_token = self._trie['/some_dir/some_token_1']
         some_token.owner = 'some_owner'
-        some_token.expirationTime = sys.maxint  # in the future
+        some_token.expirationTime = sys.maxsize  # in the future
         some_query = Query()
         some_query.namePrefix = ''
         some_query.maxTokens = 200
         request = QueryAndOwnRequest()
         request.owner = 'some_other_owner'
-        request.expirationTime = sys.maxint
+        request.expirationTime = sys.maxsize
         request.query = some_query
         transaction = QueryAndOwnTransaction()
         transaction.prepare(request)
@@ -300,4 +300,4 @@ class TransactionTestCase(unittest.TestCase):
         self.assertEqual(len(self._trie) - 2, len(response.tokens))
         for token in response.tokens:
             self.assertEquals('some_other_owner', token.owner)
-            self.assertEquals(sys.maxint, token.expirationTime)
+            self.assertEquals(sys.maxsize, token.expirationTime)

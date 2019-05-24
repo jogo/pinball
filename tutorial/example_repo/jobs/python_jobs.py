@@ -1,3 +1,4 @@
+from __future__ import print_function
 # Copyright 2015, Pinterest, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -20,17 +21,17 @@ from pinball_ext.job.basic_jobs import PythonJob
 class ExamplePythonJob(PythonJob):
 
     def _setup(self):
-        print 'Do some setup in example python job!'
+        print('Do some setup in example python job!')
 
     def _execute(self):
-        print 'Current time is %s' % str(datetime.datetime.now())
+        print('Current time is %s' % str(datetime.datetime.now()))
 
 
 class ExamplePinballMagicPythonJob(PythonJob):
     def _setup(self):
-        print 'Do some setup in example python job!'
+        print('Do some setup in example python job!')
 
     def _execute(self):
         # a_python_key=a_python_value pair will be passed to
         # the downstream job as event attribute.
-        print 'PINBALL:EVENT_ATTR:a_python_key=a_python_value'
+        print('PINBALL:EVENT_ATTR:a_python_key=a_python_value')

@@ -204,7 +204,7 @@ class StdoutProcessWrapper(object):
 
     def next(self):
         try:
-            return self.popen_obj.stdout.next()
+            return next(self.popen_obj.stdout)
         except StopIteration as e:
             self.popen_obj.wait()
             self._verify_success()
@@ -212,7 +212,7 @@ class StdoutProcessWrapper(object):
 
     def __iter__(self):
         while True:
-            yield self.next()
+            yield next(self)
 
     def read(self, bytes_to_read=None):
         if bytes_to_read:

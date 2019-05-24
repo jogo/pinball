@@ -13,6 +13,7 @@
 # limitations under the License.
 
 """Defines example jobs."""
+from __future__ import print_function
 
 import datetime
 import os
@@ -28,16 +29,16 @@ JOB_IMPORT_DIRS = [os.path.dirname(os.path.realpath(__file__))]
 class ExamplePythonJob(PythonJob):
 
     def _setup(self):
-        print 'Do some setup in example python job!'
+        print('Do some setup in example python job!')
 
     def _execute(self):
-        print 'Current time is %s' % str(datetime.datetime.now())
+        print('Current time is %s' % str(datetime.datetime.now()))
 
 
 class ExampleCommandJob(CommandLineJob):
 
     def _setup(self):
-        print 'Do not need to add args for this command!'
+        print('Do not need to add args for this command!')
         self.arguments = ''
 
     def _get_command(self):

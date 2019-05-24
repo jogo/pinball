@@ -1,3 +1,4 @@
+from __future__ import print_function
 # Copyright 2015, Pinterest, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -18,7 +19,7 @@ from pinball_ext.job.basic_jobs import CommandLineJob
 class ExampleCommandJob(CommandLineJob):
 
     def _setup(self):
-        print 'Do not need to add args for this command!'
+        print('Do not need to add args for this command!')
         self.arguments = ''
 
     def _get_command(self):

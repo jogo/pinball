@@ -1,3 +1,4 @@
+from __future__ import print_function
 # Copyright 2015, Pinterest, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -30,5 +31,5 @@ class RandomUsersHiveJob(HiveJob):
 
     def _complete(self):
         super(RandomUsersHiveJob, self)._complete()
-        print "job stdout:\n"
-        print self._job_output
+        print("job stdout:\n")
+        print(self._job_output)

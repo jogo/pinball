@@ -198,7 +198,7 @@ class DataBuilder(object):
 
     @staticmethod
     def _jobs_data_from_job_tokens(job_tokens):
-        instance_start_time = sys.maxint
+        instance_start_time = sys.maxsize
         instance_end_time = 0
         now = time.time()
         for job_token in job_tokens:
@@ -209,7 +209,7 @@ class DataBuilder(object):
                 end_time = (job.history[-1].end_time
                             if job.history[-1].end_time else now)
                 instance_end_time = max(instance_end_time, end_time)
-        if instance_start_time == sys.maxint:
+        if instance_start_time == sys.maxsize:
             instance_start_time = now
         if instance_end_time == 0:
             instance_end_time = now
@@ -297,7 +297,7 @@ class DataBuilder(object):
                     start_time = first_execution_record.start_time
                 last_execution_record = job.history[-1]
                 if not last_execution_record.end_time:
-                    end_time = sys.maxint
+                    end_time = sys.maxsize
                 else:
                     if last_execution_record.end_time > end_time:
                         end_time = last_execution_record.end_time
@@ -339,7 +339,7 @@ class DataBuilder(object):
                 timestamp = abort_signal.attributes.get(Signal.TIMESTAMP_ATTR)
                 start_time = timestamp
                 end_time = timestamp
-        elif (end_time == 0 or end_time == sys.maxint or
+        elif (end_time == 0 or end_time == sys.maxsize or
               (is_active and not is_scheduled_for_archive)):
             status = Status.RUNNING
             end_time = None
@@ -411,7 +411,7 @@ class DataBuilder(object):
             elif wf_end_time is not None:
                 # reuse start time if we lost the actual end time
                 this_end_time = instance.start_time \
-                    if instance.end_time == sys.maxint else instance.end_time
+                    if instance.end_time == sys.maxsize else instance.end_time
                 if this_end_time > wf_end_time:
                     wf_start_time = instance.start_time
                     wf_end_time = this_end_time

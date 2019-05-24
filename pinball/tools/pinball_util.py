@@ -19,6 +19,7 @@ but also with the store.
 
 TODO(mao): Make sure proper django setting when interact with store.
 """
+from __future__ import print_function
 import argparse
 import sys
 
@@ -146,9 +147,9 @@ class Rm(Command):
         if not tokens:
             output += 'no tokens found\n'
         else:
-            print 'removing:'
+            print('removing:')
             for token in tokens:
-                print '\t%s' % token.name
+                print('\t%s' % token.name)
             if self._force or confirm('remove %d tokens' % len(tokens)):
                 request = ModifyRequest(deletes=tokens)
                 client.modify(request)
@@ -285,7 +286,7 @@ def main():
     command.prepare(options)
     factory = Factory(master_hostname=options.host, master_port=options.port)
     client = factory.get_client()
-    print command.execute(client, None)
+    print(command.execute(client, None))
 
 
 if __name__ == '__main__':

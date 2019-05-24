@@ -156,7 +156,7 @@ class S3FileLogSaver(FileLogSaver):
             PinballConfig.LOCAL_LOGS_DIR_PREFIX)
         self._local_file_log_saver = FileLogSaver(local_file_path)
         self._last_remote_upload_time = time.time()
-        self._pending_bytes = 0L
+        self._pending_bytes = 0
         self._s3_key = None
 
     def open(self, mode=None):
@@ -184,7 +184,7 @@ class S3FileLogSaver(FileLogSaver):
         if os.path.exists(self._local_file_log_saver._file_path):
             try:
                 os.remove(self._local_file_log_saver._file_path)
-            except OSError, e:
+            except OSError as e:
                 LOG.warn('deletion failed due to: %s', e)
 
     def _check_s3_upload_condition(self):
@@ -222,7 +222,7 @@ class S3FileLogSaver(FileLogSaver):
         if self._check_s3_upload_condition():
             self._sync_to_s3()
             self._last_remote_upload_time = time.time()
-            self._pending_bytes = 0L
+            self._pending_bytes = 0
 
     def read(self):
         """Read from a s3 file."""

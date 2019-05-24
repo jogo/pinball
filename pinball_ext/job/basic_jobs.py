@@ -1,3 +1,4 @@
+from __future__ import print_function
 # Copyright 2015, Pinterest, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -127,7 +128,7 @@ class JobBase(object):
             self._setup()
             self._set_output_dirs()
             if dry_run:
-                print self
+                print(self)
                 return
             if not self._skip_execution():
                 self._execute()

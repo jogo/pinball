@@ -13,6 +13,7 @@
 # limitations under the License.
 
 """Constructs shared by multiple tools."""
+from __future__ import print_function
 import abc
 
 from pinball.config.utils import PinballException
@@ -69,7 +70,7 @@ def confirm(prompt='Confirm'):
         if not ans:
             return False
         if ans not in ['y', 'Y', 'n', 'N']:
-            print 'please enter y or n.'
+            print('please enter y or n.')
             continue
         if ans == 'y' or ans == 'Y':
             return True
